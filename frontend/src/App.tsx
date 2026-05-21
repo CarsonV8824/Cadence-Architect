@@ -7,7 +7,7 @@ function App() {
 
   return (
     <Router>
-      <div className="bg-gray-200 min-h-screen">
+      <div className="bg-indigo-950 min-h-screen">
         <NavBar></NavBar>
         <Routes>
           <Route path="/" element={<Navigate to="/home" replace />} />
