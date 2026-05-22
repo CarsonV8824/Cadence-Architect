@@ -1,7 +1,15 @@
+import Card from "../componets/card"
+
 export default function Generate(){
     return (
         <div>
-            <h1>Generate</h1>
+            <div>
+                <Card text={"works"}></Card>
+            </div>
+            <div className="grid grid-cols-2">
+                <Card text={"works"}></Card>
+                <Card text={"works"}></Card>
+            </div>
         </div>
     )
 }
