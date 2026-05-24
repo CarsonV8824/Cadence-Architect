@@ -94,6 +94,26 @@ Example response:
 }
 ```
 
+## Deploying on Render
+
+This repo now includes a root `render.yaml` so you can deploy it through Render Blueprints instead of setting everything up by hand.
+
+What it creates:
+
+- a Django web service from `backend/`
+- a static frontend site from `frontend/`
+- a Render Postgres database connection for Django through `DATABASE_URL`
+
+To use it:
+
+1. Push the repo to GitHub.
+2. In Render, open `Blueprints`.
+3. Click `New Blueprint Instance`.
+4. Select this repo and apply the blueprint.
+5. When prompted, set `DJANGO_CORS_ALLOWED_ORIGINS` to your frontend URL.
+
+After the services are created, confirm the frontend environment variable points at your live backend URL and update `DJANGO_ALLOWED_HOSTS` if you rename the backend service.
+
 ## Why I made it
 
 I wanted to build something that mixes music and software in a way that feels useful. Sometimes the hardest part of writing is just getting a starting point, and this project is meant to help with that by generating progressions you can react to, change, or build on.

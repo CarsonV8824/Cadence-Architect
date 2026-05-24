@@ -1,0 +1,40 @@
+services:
+  - type: web
+    name: cadence-architect-api
+    runtime: python
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    preDeployCommand: python manage.py migrate
+    startCommand: python -m gunicorn config.wsgi:application
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: cadence-architect-db
+          property: connectionString
+      - key: DJANGO_SECRET_KEY
+        generateValue: true
+      - key: DJANGO_DEBUG
+        value: "False"
+      - key: DJANGO_ALLOWED_HOSTS
+        value: cadence-architect-api.onrender.com
+      - key: DJANGO_CORS_ALLOWED_ORIGINS
+        sync: false
+
+  - type: web
+    name: cadence-architect
+    runtime: static
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    staticPublishPath: ./frontend/dist
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    envVars:
+      - key: VITE_API_BASE_URL
+        value: https://cadence-architect-api.onrender.com
+
+databases:
+  - name: cadence-architect-db
+    databaseName: cadencearchitect
+    user: cadencearchitect

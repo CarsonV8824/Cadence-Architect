@@ -18,6 +18,12 @@ def _load_markov_generator():
     spec.loader.exec_module(module)
     return module.make_markov_sentences
 
+
+@api_view(["GET"])
+def health_check(request):
+    return Response({"status": "ok"})
+
+
 @api_view(["POST"])
 def generate_progression(request):
     raw_length = request.data.get("length", 8)
