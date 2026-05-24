@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom"
+import { HashRouter as Router, Routes, Route, Navigate } from "react-router-dom"
 import NavBar from "./componets/navbar"
 import Home from "./pages/home"
 import Generate from "./pages/generate"
