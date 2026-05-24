@@ -10,6 +10,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "dev-only-secret-key")
 DEBUG = os.getenv("DJANGO_DEBUG", "True").lower() == "true"
+USE_SECURE_COOKIES = os.getenv("DJANGO_USE_SECURE_COOKIES", str(not DEBUG)).lower() == "true"
+ENABLE_HSTS = os.getenv("DJANGO_ENABLE_HSTS", str(not DEBUG)).lower() == "true"
+ANON_THROTTLE_RATE = os.getenv("DJANGO_ANON_THROTTLE_RATE", "20/minute")
 
 ALLOWED_HOSTS = [
     host.strip()
@@ -24,6 +27,8 @@ CORS_ALLOWED_ORIGINS = [
     ).split(",")
     if origin.strip()
 ]
+
+CSRF_TRUSTED_ORIGINS = CORS_ALLOWED_ORIGINS.copy()
 
 INSTALLED_APPS = [
     "corsheaders",
@@ -68,6 +73,20 @@ USE_TZ = True
 STATIC_URL = "static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+SECURE_SSL_REDIRECT = not DEBUG
+SESSION_COOKIE_SECURE = USE_SECURE_COOKIES
+CSRF_COOKIE_SECURE = USE_SECURE_COOKIES
+SECURE_CONTENT_TYPE_NOSNIFF = True
+SECURE_BROWSER_XSS_FILTER = True
+X_FRAME_OPTIONS = "DENY"
+REFERRER_POLICY = "same-origin"
+
+if ENABLE_HSTS:
+    SECURE_HSTS_SECONDS = 60 * 60 * 24 * 30
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True
+
 REST_FRAMEWORK = {
     "DEFAULT_RENDERER_CLASSES": [
         "rest_framework.renderers.JSONRenderer",
@@ -75,4 +94,10 @@ REST_FRAMEWORK = {
     "DEFAULT_PARSER_CLASSES": [
         "rest_framework.parsers.JSONParser",
     ],
+    "DEFAULT_THROTTLE_CLASSES": [
+        "rest_framework.throttling.AnonRateThrottle",
+    ],
+    "DEFAULT_THROTTLE_RATES": {
+        "anon": ANON_THROTTLE_RATE,
+    },
 }
