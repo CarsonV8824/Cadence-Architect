@@ -1,4 +1,4 @@
 {
-    "title": "Generate chord progressions",
-    "description": "Choose how long you want the progression to be, then generate a new Markov-based chord idea from the Django backend."
+    "title": "Generate a chord progression",
+    "description": "Pick how long you want the progression to be, generate a new result from the backend, and listen back to it right on the page. The idea is simple: get a progression fast, then build from there."
 }

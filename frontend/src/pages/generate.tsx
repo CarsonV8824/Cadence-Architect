@@ -1,4 +1,5 @@
 import { useState, type FormEvent } from "react"
+import ChordPlayer from "../componets/chord-player"
 import GenerateContent from "./content/generate.json"
 
 const LENGTH_OPTIONS = [4, 6, 8, 12, 16]
@@ -134,6 +135,7 @@ export default function Generate() {
                             <p className="mt-2 rounded-2xl bg-black/20 px-4 py-3 font-mono text-sm text-gray-100">
                                 {progressionText}
                             </p>
+                            <ChordPlayer progression={progression} />
                         </div>
                     ) : (
                         <div className="mt-6 rounded-2xl border border-dashed border-white/15 bg-white/5 p-6 text-slate-300">

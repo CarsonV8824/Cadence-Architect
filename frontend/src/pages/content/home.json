@@ -1,6 +1,6 @@
 {
-    "title":"Welcome to Cadence Architect!",
-    "titleContent": "Unlock endless musical inspiration with AI-generated chord progressions. Cadence Architect uses advanced machine learning to create unique, inspiring chord sequences tailored to your musical style. Whether you're a composer seeking fresh ideas, a producer building tracks, or a musician exploring new possibilities, our intelligent chord generator helps you break through creative blocks and discover unexpected harmonic combinations. Each session generates truly random progressions that spark creativity and open new creative doors.",
+    "title":"Welcome to Cadence Architect",
+    "titleContent": "Cadence Architect is a chord progression generator built to help with one of the hardest parts of writing music: getting started. Instead of staring at a blank project, you can generate a progression, hear it back, and use it as a starting point for whatever you want to build next.",
     "reasonTitle": "Why?",
-    "reasonAnswer": ""
+    "reasonAnswer": "I made this because music and software are two things I care about, and this project gave me a way to bring them together into something useful. Sometimes you do not need a full song idea. You just need a progression that gives you somewhere to begin."
 }
